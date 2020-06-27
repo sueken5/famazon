@@ -1,0 +1,128 @@
+{
+  "product": {
+    "id": "product_id",
+    "name": "product_name",
+    "publisher": {
+        "id": "publisher_id",
+        "name": "publisher_name"
+    },
+    "images": [
+      "https://ex.com/image",
+      "https://ex.com/image",
+      "https://ex.com/image"
+    ],
+    "price": 1020,
+    "stock_count": 2,
+    "delivery": {
+      "date": 191919191,
+      "hour_range": {
+        "from": 1,
+        "to": 2
+      },
+      "company": {
+        "id": "famazon_id",
+        "name": "famazon"
+      }
+    }
+  },
+  "accompany_products": [
+    {
+      "id": "product_id_1",
+      "name": "product_name_1",
+      "image_url": "",
+      "price": 1138
+    },
+    {
+      "id": "product_id_2",
+      "name": "product_name_2",
+      "image_url": "",
+      "price": 11923
+    }
+  ],
+  "related_products": [
+    {
+      "id": "related_product_id_1",
+      "name": "related_product_name_1",
+      "image_url": "",
+      "price": 1138,
+      "review": {
+        "count": 4,
+        "avg_score": 3.9
+      }
+    },
+    {
+      "id": "related_product_id_2",
+      "name": "related_product_name_2",
+      "image_url": "",
+      "price": 248,
+      "review": {
+        "count": 4,
+        "avg_score": 3.9
+      }
+    },
+    {
+      "id": "related_product_id_3",
+      "name": "related_product_name_3",
+      "image_url": "",
+      "price": 9083,
+      "review": {
+        "count": 4,
+        "avg_score": 3.9
+      }
+    }
+  ],
+  "similar_products": [
+    {
+      "id": "related_product_id_3",
+      "name": "related_product_name_3",
+      "image_url": "",
+      "price": 9083,
+      "review": {
+        "count": 4,
+        "avg_score": 3.9
+      },
+      "deliver": {
+        "id": "amazon"
+      },
+      "publisher": {
+        "id": "",
+        "name": "publisher_name"
+      }
+    },
+    {
+      "id": "related_product_id_3",
+      "name": "related_product_name_3",
+      "image_url": "",
+      "price": 9083,
+      "review": {
+        "count": 4,
+        "avg_score": 3.9
+      },
+      "deliver": {
+        "id": "amazon"
+      },
+      "publisher": {
+        "id": "",
+        "name": "publisher_name"
+      }
+    }
+  ],
+  "product_description": "##markdown",
+  "product_detail": {
+    "features": [
+      "[サイズ] いい感じ",
+      "[重さ] いい感じ",
+      "かなりいい匂いがするのでオススメです"
+    ],
+    "info": [
+      {
+        "header": "電池付きか",
+        "body": "付いてません"
+      },
+      {
+        "header": "梱包サイズ",
+        "body": "そこそこの大きさ"
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "time_sale_products": [
+    {
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/614golSJWnL._AC_SX466_.jpg",
+      "description": "キャワワな猫ちゃん",
+      "price_range": {
+        "from": 0,
+        "to": 1000
+      },
+      "time_limit": 1593529200
+    }
+  ],
+  "recommended_products": [
+    {
+      "id": 1,
+      "name": "product1",
+      "imageURL": "https://i.pinimg.com/originals/ea/57/5e/ea575e195be6fdd6ec3e0c6a2d6d9f8f.jpg",
+      "price": 2134
+    },
+    {
+      "id": 2,
+      "name": "product2",
+      "imageURL": "https://dol.ismcdn.jp/mwimgs/c/8/670m/img_c8dad835c4b9134b067cc8b8efcab22f143142.jpg",
+      "price": 3420
+    },
+    {
+      "id": 3,
+      "name": "product3",
+      "imageURL": "https://images-na.ssl-images-amazon.com/images/I/91HngifsNpL.jpg",
+      "price": 100
+    },
+    {
+      "id": 4,
+      "name": "product4",
+      "imageURL": "https://i.ytimg.com/vi/0AL7r6bCzIA/maxresdefault.jpg",
+      "price": 9021
+    }
+  ]
+}
