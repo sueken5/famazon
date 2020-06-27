@@ -1,13 +1,28 @@
 import 'dart:ffi';
-
+import 'dart:convert';
 import 'package:famazon/src/product_page.dart';
+import 'package:famazon/src/home_page_api.dart';
 import 'package:flutter/material.dart';
-
-class HomePageAPIResponse {}
+import 'package:flutter/services.dart' show rootBundle;
 
 class HomePage extends StatelessWidget {
+  HomePageAPIResponse res;
+
+  Future<void> request() async {
+    try {
+      String json =
+      await rootBundle.loadString('mock/home_page_api_response.json');
+      res = HomePageAPIResponse.fromJson(jsonDecode(json));
+      print(res.recommendedProducts[0].id);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    request();
+
     List<Widget> ws = [
       timeSale,
 //      relatedCheckedProducts(context),
