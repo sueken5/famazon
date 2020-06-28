@@ -60,7 +60,7 @@ Widget buildList(List<Widget> ws) {
     itemCount: ws.length,
     itemBuilder: (context, index) => Padding(
       padding: EdgeInsets.all(8.0),
-      child: Center(child: ws[index]),
+      child: ws[index],
     ),
   );
 }

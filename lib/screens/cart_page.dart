@@ -18,20 +18,18 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       appBar: MyAppBar().build(context),
       // body is the majority of the screen.
-      body: Center(
-        child: FutureBuilder<CartPageAPIResponse>(
-          future: response,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text("カートページですう");
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
+      body: FutureBuilder<CartPageAPIResponse>(
+        future: response,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text("カートページですう");
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
 
-            // By default, show a loading spinner.
-            return CircularProgressIndicator();
-          },
-        ),
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
       ),
     );
   }

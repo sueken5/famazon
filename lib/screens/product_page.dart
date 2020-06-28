@@ -23,37 +23,49 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       appBar: MyAppBar().build(context),
       // body is the majority of the screen.
-      body: Center(
-        child: FutureBuilder<ProductPageAPIResponse>(
-          future: response,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text(snapshot.data.product.name),
-                      Text("評価: ${snapshot.data.product.reviewAVGScore}"),
-                      Text("${snapshot.data.product.reviewCount}"),
-                    ],
-                  ),
-                  Image.network(snapshot.data.product.images[0]),
-                  Text("価格: ${snapshot.data.product.price}"),
-                  Text("残り在庫数: ${snapshot.data.product.stockCount}"),
-                  RaisedButton(
-                    onPressed: () => cart.add(this.productID),
-                    child: Text('カートに入れる'),
-                  ),
-                ],
-              );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
+      body: FutureBuilder<ProductPageAPIResponse>(
+        future: response,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(snapshot.data.product.name),
+                    Text("評価: ${snapshot.data.product.reviewAVGScore}"),
+                    Text("${snapshot.data.product.reviewCount}"),
+                  ],
+                ),
+                Image.network(snapshot.data.product.images[0]),
+                Row(
+                  children: <Widget>[
+                    Text("価格: ${snapshot.data.product.price}"),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text("残り在庫数: ${snapshot.data.product.stockCount}"),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: RaisedButton(
+                        onPressed: () => cart.add(this.productID),
+                        child: Text('カートに入れる'),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
 
-            // By default, show a loading spinner.
-            return CircularProgressIndicator();
-          },
-        ),
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
       ),
     );
   }
