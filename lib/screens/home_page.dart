@@ -18,13 +18,11 @@ class _HomePageState extends State<HomePage> {
     var cart = Provider.of<CartModel>(context);
 
     List<Widget> ws = [
-      Text("cart count: ${cart.count}"),
       timeSale,
       FutureBuilder<HomePageAPIResponse>(
         future: response,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data.recommendedProducts[0].imageURL);
             return relatedCheckedProducts(
                 context,
                 snapshot.data.recommendedProducts
@@ -62,23 +60,24 @@ class _HomePageState extends State<HomePage> {
                   ? new Container()
                   : new Positioned(
                       child: new Stack(
-                      children: <Widget>[
-                        new Icon(Icons.brightness_1,
-                            size: 20.0, color: Colors.green[800]),
-                        new Positioned(
-                            top: 3.0,
-                            right: 4.0,
-                            child: new Center(
-                              child: new Text(
-                                cart.count.toString(),
-                                style: new TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11.0,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            )),
-                      ],
-                    )),
+                        children: <Widget>[
+                          new Icon(Icons.brightness_1,
+                              size: 20.0, color: Colors.green[800]),
+                          new Positioned(
+                              top: 3.0,
+                              right: 4.0,
+                              child: new Center(
+                                child: new Text(
+                                  cart.count.toString(),
+                                  style: new TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
             ],
           )
         ],
