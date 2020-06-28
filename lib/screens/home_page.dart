@@ -60,11 +60,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: buildList(ws),
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add', // used by assistive technologies
-        child: Icon(Icons.add),
-        onPressed: null,
-      ),
     );
   }
 }
