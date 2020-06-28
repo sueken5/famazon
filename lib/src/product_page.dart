@@ -1,3 +1,4 @@
+import 'package:famazon/src/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:famazon/src/product_page_api.dart';
 
@@ -33,6 +34,16 @@ class _ProductPageState extends State<ProductPage> {
                     child: Text('productID id ${this.productID}'),
                   ),
                   Image.network(snapshot.data.product.images[0]),
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CartPage()),
+                      );
+                    },
+                    child: Text('カートに入れる'),
+                  ),
                 ],
               );
             } else if (snapshot.hasError) {
