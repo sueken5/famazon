@@ -1,35 +1,40 @@
-import 'dart:ffi';
-import 'dart:convert';
-import 'package:famazon/src/product_page.dart';
 import 'package:famazon/src/home_page_api.dart';
+import 'package:famazon/src/product_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
-class HomePage extends StatelessWidget {
-  HomePageAPIResponse res;
+class _HomePageState extends State<HomePage> {
+  Future<HomePageAPIResponse> response;
 
-  Future<void> request() async {
-    try {
-      String json =
-      await rootBundle.loadString('mock/home_page_api_response.json');
-      res = HomePageAPIResponse.fromJson(jsonDecode(json));
-      print(res.recommendedProducts[0].id);
-    } catch (e) {
-      print(e.toString());
-    }
+  @override
+  void initState() {
+    super.initState();
+    response = homePageAPIRequest();
   }
 
   @override
   Widget build(BuildContext context) {
-    request();
-
     List<Widget> ws = [
       timeSale,
-//      relatedCheckedProducts(context),
-      FittedBox(
-        fit: BoxFit.fitWidth,
-        child: recommendedAndPopularProducts,
-      ),
+      FutureBuilder<HomePageAPIResponse>(
+        future: response,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            print(snapshot.data.recommendedProducts[0].imageURL);
+            return
+              relatedCheckedProducts(
+                  context,
+                  snapshot.data.recommendedProducts
+                      .map((e) => Product(e.id, e.name, e.price, e.imageURL))
+                      .toList());
+
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+
+          // By default, show a loading spinner.
+          return CircularProgressIndicator();
+        },
+      )
     ];
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
@@ -64,6 +69,11 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => new _HomePageState();
 }
 
 Widget buildList(List<Widget> ws) {
@@ -140,13 +150,9 @@ Widget relatedCheckedProducts(BuildContext context, List<Product> products) {
 class Product {
   final String id;
   final String name;
-  final Int64 price;
+  final int price;
   final String imageURL;
-  Product(
-      {@required this.id,
-      @required this.name,
-      @required this.price,
-      @required this.imageURL});
+  Product(this.id, this.name, this.price, this.imageURL);
 }
 
 Widget product(BuildContext context, Product product) {
