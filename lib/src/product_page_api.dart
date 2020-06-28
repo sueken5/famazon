@@ -1,4 +1,13 @@
-class ProductPageAPI {
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
+
+Future<ProductPageAPIResponse> productPageAPIRequest(String productID) async {
+  String val =
+      await rootBundle.loadString('mock/product_page_api_response.json');
+  return ProductPageAPIResponse.fromJson(jsonDecode(val));
+}
+
+class ProductPageAPIResponse {
   final Product _product;
   final List<SimilarProduct> _similarProducts;
   final List<RelatedProduct> _relatedProducts;
@@ -7,12 +16,17 @@ class ProductPageAPI {
   List<SimilarProduct> get similarProducts => _similarProducts;
   List<RelatedProduct> get relatedProducts => _relatedProducts;
 
-  ProductPageAPI(this._product, this._similarProducts, this._relatedProducts);
+  ProductPageAPIResponse(
+      this._product, this._similarProducts, this._relatedProducts);
 
-  ProductPageAPI.fromJson(Map<String, dynamic> json)
-  : _product = Product.fromJson(json["product"]),
-    _similarProducts = (json["similar_products"] as List).map((e) => SimilarProduct.fromJson(e)).toList(),
-    _relatedProducts = (json["related_products"] as List).map((e) => RelatedProduct.fromJson(e)).toList();
+  ProductPageAPIResponse.fromJson(Map<String, dynamic> json)
+      : _product = Product.fromJson(json["product"]),
+        _similarProducts = (json["similar_products"] as List)
+            .map((e) => SimilarProduct.fromJson(e))
+            .toList(),
+        _relatedProducts = (json["related_products"] as List)
+            .map((e) => RelatedProduct.fromJson(e))
+            .toList();
 }
 
 class Product {
@@ -23,7 +37,8 @@ class Product {
   final int _price;
   final int _stockCount;
 
-  Product(this._id, this._name, this._productPublisher, this._images, this._price, this._stockCount);
+  Product(this._id, this._name, this._productPublisher, this._images,
+      this._price, this._stockCount);
 
   String get id => _id;
   String get name => _name;
@@ -66,9 +81,9 @@ class Delivery {
 
   Delivery(this._date, this._hourRange, this._deliverCompany);
   Delivery.fromJson(Map<String, dynamic> json)
-  : _date = json["date"],
-    _hourRange = HourRange.fromJson(json["hour_range"]), 
-    _deliverCompany = DeliverCompany.fromJson(json["company"]);
+      : _date = json["date"],
+        _hourRange = HourRange.fromJson(json["hour_range"]),
+        _deliverCompany = DeliverCompany.fromJson(json["company"]);
 }
 
 class HourRange {
@@ -131,14 +146,15 @@ class RelatedProduct {
   int get price => _price;
   Review get review => _review;
 
-  RelatedProduct(this._id, this._name, this._imageURL, this._price, this._review);
+  RelatedProduct(
+      this._id, this._name, this._imageURL, this._price, this._review);
 
   RelatedProduct.fromJson(Map<String, dynamic> json)
-  : _id = json["id"],
-    _name = json["name"],
-    _imageURL = json["image_url"],
-    _price = json["price"],
-    _review = Review.fromJson(json['review']);
+      : _id = json["id"],
+        _name = json["name"],
+        _imageURL = json["image_url"],
+        _price = json["price"],
+        _review = Review.fromJson(json['review']);
 }
 
 class Review {
@@ -169,13 +185,14 @@ class SimilarProduct {
   Review get review => _review;
   ProductPublisher get productPublisher => _productPublisher;
 
-  SimilarProduct(this._id, this._name, this._imageURL, this._price, this._review, this._productPublisher);
+  SimilarProduct(this._id, this._name, this._imageURL, this._price,
+      this._review, this._productPublisher);
 
   SimilarProduct.fromJson(Map<String, dynamic> json)
-  : _id = json["id"],
-    _name = json["name"],
-    _imageURL = json["image_url"],
-    _price = json["price"],
-    _review = Review.fromJson(json["review"]),
-    _productPublisher = ProductPublisher.fromJson(json["publisher"]);
+      : _id = json["id"],
+        _name = json["name"],
+        _imageURL = json["image_url"],
+        _price = json["price"],
+        _review = Review.fromJson(json["review"]),
+        _productPublisher = ProductPublisher.fromJson(json["publisher"]);
 }

@@ -42,12 +42,7 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: Icon(Icons.menu),
           tooltip: 'Navigation menu',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProductPage()),
-            );
-          },
+          onPressed: null,
         ),
         title: Text('famazon.co.jp'),
         actions: <Widget>[
@@ -124,7 +119,7 @@ Widget relatedCheckedProducts(BuildContext context, List<Product> products) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     product(context, products[0]),
-                    product(context, products[0]),
+                    product(context, products[1]),
                   ],
                 ),
               ),
@@ -133,8 +128,8 @@ Widget relatedCheckedProducts(BuildContext context, List<Product> products) {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    product(context, products[0]),
-                    product(context, products[0]),
+                    product(context, products[2]),
+                    product(context, products[3]),
                   ],
                 ),
               ),
@@ -167,7 +162,7 @@ Widget product(BuildContext context, Product product) {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ProductPage(productID: product.id)),
+              builder: (context) => ProductPage(product.id)),
         );
       },
       child: Column(
@@ -181,33 +176,3 @@ Widget product(BuildContext context, Product product) {
   );
 }
 
-final recommendedAndPopularProducts = Container(
-  child: Column(
-    children: <Widget>[
-      Text('オススメの商品と人気商品'),
-      Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Image.network(
-                    'https://images-na.ssl-images-amazon.com/images/I/71sJYT6w-sL._AC_SY355_.jpg'),
-                Image.network(
-                    'https://images-na.ssl-images-amazon.com/images/I/71sJYT6w-sL._AC_SY355_.jpg'),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Image.network(
-                    'https://images-na.ssl-images-amazon.com/images/I/71sJYT6w-sL._AC_SY355_.jpg'),
-                Image.network(
-                    'https://images-na.ssl-images-amazon.com/images/I/71sJYT6w-sL._AC_SY355_.jpg'),
-              ],
-            ),
-            Text('もっとみる'),
-          ],
-        ),
-      )
-    ],
-  ),
-);

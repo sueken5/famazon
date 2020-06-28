@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:famazon/src/product_page_api.dart';
 
-class ProductPage extends StatelessWidget {
+class _ProductPageState extends State<ProductPage> {
+  Future<ProductPageAPIResponse> response;
   final String productID;
-  ProductPage({Key key, @required this.productID}) : super (key: key);
+
+  _ProductPageState(this.productID);
+
+  @override
+  void initState() {
+    super.initState();
+    response = productPageAPIRequest(productID);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +20,38 @@ class ProductPage extends StatelessWidget {
         title: Text("Product Page"),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
+        child: FutureBuilder<ProductPageAPIResponse>(
+          future: response,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('productID id ${this.productID}'),
+                  ),
+                  Image.network(snapshot.data.product.images[0]),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+
+            // By default, show a loading spinner.
+            return CircularProgressIndicator();
           },
-          child: Text('productID ids ${this.productID}'),
         ),
       ),
     );
   }
+}
+
+class ProductPage extends StatefulWidget {
+  final String productID;
+  ProductPage(this.productID, {Key key}) : super(key: key);
+
+  @override
+  _ProductPageState createState() => new _ProductPageState(productID);
 }
