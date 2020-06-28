@@ -1,4 +1,5 @@
 import 'package:famazon/apis/home_page_api.dart';
+import 'package:famazon/my_app_bar/my_app_bar.dart';
 import 'package:famazon/screens/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:famazon/models/cart.dart';
@@ -39,49 +40,7 @@ class _HomePageState extends State<HomePage> {
     ];
     // Scaffold is a layout for the major Material Components.
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Navigation menu',
-          onPressed: null,
-        ),
-        title: Text('famazon.co.jp'),
-        actions: <Widget>[
-          Stack(
-            children: <Widget>[
-              new IconButton(
-                icon: new Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                onPressed: null,
-              ),
-              cart.count == 0
-                  ? new Container()
-                  : new Positioned(
-                      child: new Stack(
-                        children: <Widget>[
-                          new Icon(Icons.brightness_1,
-                              size: 20.0, color: Colors.green[800]),
-                          new Positioned(
-                              top: 3.0,
-                              right: 4.0,
-                              child: new Center(
-                                child: new Text(
-                                  cart.count.toString(),
-                                  style: new TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.0,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-            ],
-          )
-        ],
-      ),
+      appBar: MyAppBar().build(context),
       // body is the majority of the screen.
       body: Center(
         child: buildList(ws),

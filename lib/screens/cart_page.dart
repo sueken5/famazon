@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:famazon/apis/cart_page_api.dart';
+import 'package:famazon/my_app_bar/my_app_bar.dart';
 
 class _CartPageState extends State<CartPage> {
   Future<CartPageAPIResponse> response;
@@ -15,9 +16,8 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Cart Page"),
-      ),
+      appBar: MyAppBar().build(context),
+      // body is the majority of the screen.
       body: Center(
         child: FutureBuilder<CartPageAPIResponse>(
           future: response,
