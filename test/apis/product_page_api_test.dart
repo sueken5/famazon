@@ -1,11 +1,11 @@
-import 'package:famazon/src/product_page_api.dart';
+import 'package:famazon/apis/product_page_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:convert';
 
 void main() {
-  ProductPageAPI res;
+  ProductPageAPIResponse res;
   setUp(() {
-    res = ProductPageAPI.fromJson(jsonDecode('''
+    res = ProductPageAPIResponse.fromJson(jsonDecode('''
 {
   "product": {
     "id": "test_product_id",

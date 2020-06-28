@@ -1,6 +1,7 @@
-import 'package:famazon/src/cart_page.dart';
 import 'package:flutter/material.dart';
-import 'package:famazon/src/product_page_api.dart';
+import 'package:famazon/apis/product_page_api.dart';
+import 'package:famazon/models/cart.dart';
+import 'package:provider/provider.dart';
 
 class _ProductPageState extends State<ProductPage> {
   Future<ProductPageAPIResponse> response;
@@ -16,6 +17,8 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Product Page"),
@@ -35,13 +38,7 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   Image.network(snapshot.data.product.images[0]),
                   RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CartPage()),
-                      );
-                    },
+                    onPressed: () => cart.add(this.productID),
                     child: Text('カートに入れる'),
                   ),
                 ],

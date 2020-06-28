@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:famazon/src/cart_page_api.dart';
+import 'package:famazon/apis/cart_page_api.dart';
 
 class _CartPageState extends State<CartPage> {
   Future<CartPageAPIResponse> response;

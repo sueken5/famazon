@@ -2,8 +2,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
 Future<HomePageAPIResponse> homePageAPIRequest() async {
-     String val = await rootBundle.loadString('mock/home_page_api_response.json');
-     return HomePageAPIResponse.fromJson(jsonDecode(val));
+  String val = await rootBundle.loadString('mock/home_page_api_response.json');
+  return HomePageAPIResponse.fromJson(jsonDecode(val));
 }
 
 class HomePageAPIResponse {

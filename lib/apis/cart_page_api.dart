@@ -12,7 +12,5 @@ class CartPageAPIResponse {
 
   bool get ok => _ok;
 
-  CartPageAPIResponse.fromJson(Map<String, dynamic> json)
-      : _ok = json['ok'];
+  CartPageAPIResponse.fromJson(Map<String, dynamic> json) : _ok = json['ok'];
 }
-

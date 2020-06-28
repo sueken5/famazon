@@ -1,6 +1,8 @@
-import 'package:famazon/src/home_page_api.dart';
-import 'package:famazon/src/product_page.dart';
+import 'package:famazon/apis/home_page_api.dart';
+import 'package:famazon/screens/product_page.dart';
 import 'package:flutter/material.dart';
+import 'package:famazon/models/cart.dart';
+import 'package:provider/provider.dart';
 
 class _HomePageState extends State<HomePage> {
   Future<HomePageAPIResponse> response;
@@ -13,20 +15,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<CartModel>(context);
+
     List<Widget> ws = [
+      Text("cart count: ${cart.count}"),
       timeSale,
       FutureBuilder<HomePageAPIResponse>(
         future: response,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print(snapshot.data.recommendedProducts[0].imageURL);
-            return
-              relatedCheckedProducts(
-                  context,
-                  snapshot.data.recommendedProducts
-                      .map((e) => Product(e.id, e.name, e.price, e.imageURL))
-                      .toList());
-
+            return relatedCheckedProducts(
+                context,
+                snapshot.data.recommendedProducts
+                    .map((e) => Product(e.id, e.name, e.price, e.imageURL))
+                    .toList());
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
@@ -161,8 +164,7 @@ Widget product(BuildContext context, Product product) {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => ProductPage(product.id)),
+          MaterialPageRoute(builder: (context) => ProductPage(product.id)),
         );
       },
       child: Column(
@@ -175,4 +177,3 @@ Widget product(BuildContext context, Product product) {
     ),
   );
 }
-
