@@ -30,13 +30,16 @@ class _ProductPageState extends State<ProductPage> {
             if (snapshot.hasData) {
               return Column(
                 children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('productID id ${this.productID}'),
+                  Row(
+                    children: <Widget>[
+                      Text(snapshot.data.product.name),
+                      Text("評価: ${snapshot.data.product.reviewAVGScore}"),
+                      Text("${snapshot.data.product.reviewCount}"),
+                    ],
                   ),
                   Image.network(snapshot.data.product.images[0]),
+                  Text("価格: ${snapshot.data.product.price}"),
+                  Text("残り在庫数: ${snapshot.data.product.stockCount}"),
                   RaisedButton(
                     onPressed: () => cart.add(this.productID),
                     child: Text('カートに入れる'),

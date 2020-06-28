@@ -36,9 +36,11 @@ class Product {
   final List<String> _images;
   final int _price;
   final int _stockCount;
+  final int _reviewCount;
+  final double _reviewAVGScore;
 
   Product(this._id, this._name, this._productPublisher, this._images,
-      this._price, this._stockCount);
+      this._price, this._stockCount, this._reviewCount, this._reviewAVGScore);
 
   String get id => _id;
   String get name => _name;
@@ -46,6 +48,8 @@ class Product {
   List<String> get images => _images;
   int get price => _price;
   int get stockCount => _stockCount;
+  int get reviewCount => _reviewCount;
+  double get reviewAVGScore => _reviewAVGScore;
 
   Product.fromJson(Map<String, dynamic> json)
       : _id = json['id'],
@@ -53,6 +57,8 @@ class Product {
         _productPublisher = ProductPublisher.fromJson(json['publisher']),
         _price = json['price'],
         _stockCount = json['stock_count'],
+        _reviewCount = json['review_count'],
+        _reviewAVGScore = json['review_avg_score'],
         _images = (json['images'] as List<dynamic>).cast<String>();
 }
 

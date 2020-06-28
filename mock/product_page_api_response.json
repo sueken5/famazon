@@ -23,7 +23,9 @@
         "id": "famazon_id",
         "name": "famazon"
       }
-    }
+    },
+    "review_count": 20,
+    "review_avg_score": 3.4
   },
   "accompany_products": [
     {

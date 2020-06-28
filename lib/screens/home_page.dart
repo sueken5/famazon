@@ -42,9 +42,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: MyAppBar().build(context),
       // body is the majority of the screen.
-      body: Center(
-        child: buildList(ws),
-      ),
+      body: buildList(ws),
     );
   }
 }
@@ -87,8 +85,10 @@ final timeSale = Container(
 Widget relatedCheckedProducts(BuildContext context, List<Product> products) {
   return Container(
     padding: EdgeInsets.only(
-      left: 16,
-      right: 16,
+      top: 2,
+      bottom: 2,
+      left: 2,
+      right: 2,
     ),
     child: Column(
       children: <Widget>[
@@ -96,25 +96,30 @@ Widget relatedCheckedProducts(BuildContext context, List<Product> products) {
         Container(
           child: Column(
             children: <Widget>[
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    product(context, products[0]),
-                    product(context, products[1]),
-                  ],
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: product(context, products[0]),
+                  ),
+                  SizedBox(width: 2),
+                  Expanded(
+                    child: product(context, products[1]),
+                  ),
+                ],
               ),
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    product(context, products[2]),
-                    product(context, products[3]),
-                  ],
-                ),
+              SizedBox(height: 2),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: product(context, products[2]),
+                  ),
+                  SizedBox(width: 2),
+                  Expanded(
+                    child: product(context, products[3]),
+                  ),
+                ],
               ),
               Text('オススメの表示と管理'),
             ],
@@ -136,10 +141,12 @@ class Product {
 Widget product(BuildContext context, Product product) {
   return Container(
     padding: EdgeInsets.only(
-      left: 16,
-      right: 16,
+      top: 2,
+      bottom: 2,
+      left: 2,
+      right: 2,
     ),
-    color: Colors.grey,
+    color: Colors.white70,
     child: InkWell(
       onTap: () {
         Navigator.push(
@@ -150,7 +157,7 @@ Widget product(BuildContext context, Product product) {
       child: Column(
         children: <Widget>[
           Image.network(product.imageURL),
-          Text(product.id),
+          Text(product.name),
           Text('${product.price}'),
         ],
       ),
