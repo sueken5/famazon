@@ -49,11 +49,38 @@ class _HomePageState extends State<HomePage> {
         ),
         title: Text('famazon.co.jp'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: null,
-          ),
+          Stack(
+            children: <Widget>[
+              new IconButton(
+                icon: new Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ),
+                onPressed: null,
+              ),
+              cart.count == 0
+                  ? new Container()
+                  : new Positioned(
+                      child: new Stack(
+                      children: <Widget>[
+                        new Icon(Icons.brightness_1,
+                            size: 20.0, color: Colors.green[800]),
+                        new Positioned(
+                            top: 3.0,
+                            right: 4.0,
+                            child: new Center(
+                              child: new Text(
+                                cart.count.toString(),
+                                style: new TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            )),
+                      ],
+                    )),
+            ],
+          )
         ],
       ),
       // body is the majority of the screen.
